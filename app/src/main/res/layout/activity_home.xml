@@ -13,11 +13,13 @@
         android:background="@drawable/blue_gradient"
         android:orientation="horizontal" >
 
+
+
         <TextView
             style="@style/BlackText"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:text="@string/title_activity_home"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
@@ -50,12 +52,84 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
-            <Button
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:orientation="vertical">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+
+
+                    android:src="@drawable/ic_action_view_as_list_dark"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Home"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:id="@+id/btnSearch"
+                    android:onClick="openSearchActivity"
+                    android:src="@drawable/ic_action_search"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Search"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="openUsersActivity"
+                    android:src="@drawable/ic_action_group"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Users"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="openSettingsActivity"
+                    android:src="@drawable/ic_action_settings"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Settings"/>
+            </LinearLayout>
+
+            <!-- <Button
                 android:id="@+id/post_comment"
                 style="@style/WhiteText"
                 android:layout_width="wrap_content"
@@ -63,7 +137,7 @@
                 android:layout_gravity="right"
                 android:background="@drawable/black_button"
                 android:onClick="addComment"
-                android:text="@string/post_comment" />
+                android:text="@string/post_comment" /> -->
         </LinearLayout>
     </LinearLayout>
 

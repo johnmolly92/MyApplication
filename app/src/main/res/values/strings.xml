@@ -8,7 +8,6 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_login">Event Finder</string>
     <string name="title_activity_add_comment">AddComment</string>
-
     <string name="username_textview">Username:</string>
     <string name="password_textview">Password:</string>
     <string name="submit">Submit</string>
@@ -16,5 +15,8 @@
     <!-- string ids for home.xml -->
     <string name="post_comment">Post Comment</string>
     <string name="passwords_not_same">Passwords don\'t match</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_users">Users</string>
+    <string name="title_activity_settings">Settings</string>
 
 </resources>

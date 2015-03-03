@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -71,11 +72,32 @@ public class Home extends ListActivity {
     //manages all of our comments in a list.
     private ArrayList<HashMap<String, String>> mCommentList;
 
+    //private ImageButton mSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+       // mSearch = (ImageButton)findViewById(R.id.btnSearch);
+
+        //mSearch.setOnClickListener(this);
     }
+
+    /*@Override
+    public void onClick(View v) {
+        // determine which button was pressed:
+        switch (v.getId()) {
+            case R.id.btnSearch:
+                Intent i = new Intent(Home.this, Search.class);
+                startActivity(i);
+                break;
+
+
+            default:
+                break;
+        }
+    }*/
 
     @Override
     protected void onResume() {
@@ -85,9 +107,21 @@ public class Home extends ListActivity {
         new LoadComments().execute();
     }
 
-    public void addComment(View v)
+    public void openSearchActivity(View v)
     {
-        Intent i = new Intent(Home.this, AddComment.class);
+        Intent i = new Intent(Home.this, Search.class);
+        startActivity(i);
+    }
+
+    public void openUsersActivity(View v)
+    {
+        Intent i = new Intent(Home.this, Users.class);
+        startActivity(i);
+    }
+
+    public void openSettingsActivity(View v)
+    {
+        Intent i = new Intent(Home.this, Settings.class);
         startActivity(i);
     }
 
