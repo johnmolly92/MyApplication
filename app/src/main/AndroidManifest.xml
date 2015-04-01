@@ -42,6 +42,10 @@
             android:name=".Settings"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name=".SingleEvent"
+            android:label="@string/title_activity_single_event" >
+        </activity>
     </application>
 
 </manifest>

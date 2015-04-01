@@ -46,7 +46,7 @@ public class MainActivity extends Activity implements OnClickListener{
     //testing on your device
     //put your local ip instead,  on windows, run CMD > ipconfig
     //or in mac's terminal type ifconfig and look for the ip under en0 or en1
-    private static final String LOGIN_URL = "http://192.168.1.14:80/webservice/login.php";
+    private static final String LOGIN_URL = "http://192.168.1.17:80/webservice/login.php";
     // private static final String LOGIN_URL = "http://136.206.236.53:80/webservice/login.php";
 
     //testing on Emulator:

@@ -46,7 +46,8 @@ public class Home extends ListActivity {
     //testing on your device
     //put your local ip instead,  on windows, run CMD > ipconfig
     //or in mac's terminal type ifconfig and look for the ip under en0 or en1
-    private static final String READ_COMMENTS_URL = "http://192.168.1.14:80/webservice/eventstwo.php";
+    //TODO Change this ip to events.php
+    private static final String READ_COMMENTS_URL = "http://192.168.1.17:80/webservice/eventstwo.php";
 
     //testing on Emulator:
     //private static final String READ_COMMENTS_URL = "http://10.0.2.2:1234/webservice/comments.php";
@@ -61,6 +62,7 @@ public class Home extends ListActivity {
     private static final String TAG_DATE = "date";
     private static final String TAG_VENUE = "venue";
     private static final String TAG_TYPE = "type";
+    private static final String TAG_ID = "event_id";
     //it's important to note that the message is both in the parent branch of
     //our JSON tree that displays a "Post Available" or a "No Post Available" message,
     //and there is also a message for each individual post, listed under the "posts"
@@ -101,7 +103,6 @@ public class Home extends ListActivity {
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
         //loading the comments via AsyncTask
         new LoadComments().execute();
@@ -158,16 +159,18 @@ public class Home extends ListActivity {
                 JSONObject c = mComments.getJSONObject(i);
 
                 //gets the content of each tag
+                String id = c.getString(TAG_ID);
                 String name = c.getString(TAG_NAME);
                 String date = c.getString(TAG_DATE);
                 String venue = c.getString(TAG_VENUE);
 
-                System.out.println("Title: " + name + " Message: " + date + " Username: "+ venue);
+                System.out.println("Title: " + name + " Date: " + date + " Venue: "+ venue + " ID: " + id);
 
 
                 // creating new HashMap
                 HashMap<String, String> map = new HashMap<String, String>();
 
+                map.put(TAG_ID, id);
                 map.put(TAG_NAME, name);
                 map.put(TAG_DATE, date);
                 map.put(TAG_VENUE, venue);
@@ -217,6 +220,18 @@ public class Home extends ListActivity {
                 // This method is triggered if an item is click within our
                 // list. For our example we won't be using this, but
                 // it is useful to know in real life applications.
+                Integer e_id = (int) (long) id;
+                HashMap<String,String> test = new HashMap<>(mCommentList.get(e_id));
+                System.out.println("You clicked me!" + " Event ID: " + test.get(TAG_ID) );
+
+
+
+                Intent i = new Intent(Home.this, SingleEvent.class);
+
+                i.putExtra("event_id", test.get(TAG_ID));
+                startActivity(i);
+
+
 
             }
         });
