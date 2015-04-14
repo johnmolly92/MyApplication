@@ -40,7 +40,7 @@ public class Register extends Activity implements OnClickListener{
     //testing on your device
     //put your local ip instead,  on windows, run CMD > ipconfig
     //or in mac's terminal type ifconfig and look for the ip under en0 or en1
-    private static final String LOGIN_URL = "http://192.168.1.17:80/webservice/register.php";
+    private String REGISTER_URL;
     //private static final String LOGIN_URL = "http://136.206.236.53:80/webservice/register.php";
 
     //testing on Emulator:
@@ -57,6 +57,8 @@ public class Register extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        REGISTER_URL = getString(R.string.url_start) + "register.php";
 
         user = (EditText)findViewById(R.id.username);
         pass = (EditText)findViewById(R.id.password);
@@ -105,7 +107,7 @@ public class Register extends Activity implements OnClickListener{
 
                 //Posting user data to script
                 JSONObject json = jsonParser.makeHttpRequest(
-                        LOGIN_URL, "POST", params);
+                        REGISTER_URL, "POST", params);
 
                 // full json response
                 Log.d("Login attempt", json.toString());

@@ -33,7 +33,8 @@ public class SingleEvent extends Activity {
 
     JSONParser jsonParser = new JSONParser();
 
-    private static final String GET_DETAILS_URL = "http://192.168.1.17:80/webservice/eventdetail.php";
+
+    private  String GET_DETAILS_URL;
 
     //JSON IDS:
     private static final String TAG_SUCCESS = "success";
@@ -49,9 +50,10 @@ public class SingleEvent extends Activity {
     private static final String TAG_OPENING_TIMES = "opening_times";
     private static final String TAG_DESCRIPTION = "description";
     private static final String TAG_IMAGE_NAME = "image_name";
+    private static final String TAG_MUSIC_GENRE = "music_genre";
 
     String eventId;
-    private String id, name, date, venue, type, price, age, opening_times, description, image_name;
+    private String id, name, date, venue, type, price, age, opening_times, description, image_name,music_genre;
 
     //An array of all of our comments
     private JSONArray mComments = null;
@@ -63,7 +65,7 @@ public class SingleEvent extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_event);
 
-
+        GET_DETAILS_URL = getString(R.string.url_start) + "eventdetail.php";
 
         Intent i = getIntent();
         eventId = i.getStringExtra("event_id");
@@ -104,8 +106,9 @@ public class SingleEvent extends Activity {
                 opening_times = c.getString(TAG_OPENING_TIMES);
                 description = c.getString(TAG_DESCRIPTION);
                 image_name = c.getString(TAG_IMAGE_NAME);
+                music_genre = c.getString(TAG_MUSIC_GENRE);
 
-                System.out.println("Name: " + name + " Date: " + date + " Venue: " + venue + " ID: " + id + " Type: " + type + " price: " + price + " age: " + age + " time: " + opening_times);
+                System.out.println("Name: " + name + " Date: " + date + " Venue: " + venue + " ID: " + id + " Type: " + type + " price: " + price + " age: " + age + " time: " + opening_times+ " genre: " + music_genre);
 
 
                 //annndddd, our JSON data is up to date same with our array list
@@ -114,12 +117,16 @@ public class SingleEvent extends Activity {
             e.printStackTrace();
         }
         System.out.println("before set text");
-        System.out.println(R.drawable.kygo_image);
+
         try {
             ImageView img = (ImageView) findViewById(R.id.main_image);
             //img.setImageResource(image_id);
-            String variableValue = image_name;
-            img.setImageResource(getResources().getIdentifier(variableValue, "drawable", getPackageName()));
+
+            int id = getResources().getIdentifier("com.example.john.myapplication:drawable/" + image_name, null, null);
+            img.setImageResource(id);
+
+           // String variableValue = image_name;
+           // img.setImageResource(getResources().getIdentifier(variableValue, "drawable", getPackageName()));
 
             TextView txt = (TextView) findViewById(R.id.event_name);
             txt.setText(name);
@@ -135,6 +142,9 @@ public class SingleEvent extends Activity {
 
             txt = (TextView) findViewById(R.id.event_type);
             txt.setText(type);
+
+            txt = (TextView) findViewById(R.id.event_music_genre);
+            txt.setText(music_genre);
 
             txt = (TextView) findViewById(R.id.event_price);
             txt.setText(price);

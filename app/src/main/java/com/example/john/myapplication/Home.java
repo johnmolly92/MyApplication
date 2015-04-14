@@ -6,8 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +51,7 @@ public class Home extends ListActivity {
     //put your local ip instead,  on windows, run CMD > ipconfig
     //or in mac's terminal type ifconfig and look for the ip under en0 or en1
     //TODO Change this ip to events.php
-    private static final String READ_COMMENTS_URL = "http://192.168.1.17:80/webservice/eventstwo.php";
+    private String READ_COMMENTS_URL;
 
     //testing on Emulator:
     //private static final String READ_COMMENTS_URL = "http://10.0.2.2:1234/webservice/comments.php";
@@ -81,9 +85,10 @@ public class Home extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-       // mSearch = (ImageButton)findViewById(R.id.btnSearch);
 
-        //mSearch.setOnClickListener(this);
+        READ_COMMENTS_URL= getString(R.string.url_start) + "eventstwo.php";
+
+
     }
 
     /*@Override
@@ -106,6 +111,12 @@ public class Home extends ListActivity {
         super.onResume();
         //loading the comments via AsyncTask
         new LoadComments().execute();
+    }
+
+    public void openHomeActivity(View v)
+    {
+        Intent i = new Intent(Home.this, Home.class);
+        startActivity(i);
     }
 
     public void openSearchActivity(View v)
@@ -184,8 +195,26 @@ public class Home extends ListActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        Collections.sort(mCommentList, new MapComparator("date"));
         System.out.println("Out of updateJSONdata method.");
 
+    }
+
+    //To compare map values when sorting
+    class MapComparator implements Comparator<Map<String,String>>{
+        private final String key;
+
+        public MapComparator(String key){
+            this.key = key;
+        }
+
+        @Override
+        public int compare(Map<String, String> lhs, Map<String, String> rhs) {
+            String first = lhs.get(key);
+            String second = rhs.get(key);
+            return first.compareTo(second);
+        }
     }
 
     /**
@@ -244,7 +273,7 @@ public class Home extends ListActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(Home.this);
-            pDialog.setMessage("Loading Comments...");
+            pDialog.setMessage("Loading Events...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();

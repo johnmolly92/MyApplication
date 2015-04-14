@@ -1,12 +1,15 @@
 package com.example.john.myapplication;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
-public class Users extends ActionBarActivity {
+public class Users extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +17,30 @@ public class Users extends ActionBarActivity {
         setContentView(R.layout.activity_users);
     }
 
+
+    public void openHomeActivity(View v)
+    {
+        Intent i = new Intent(Users.this, Home.class);
+        startActivity(i);
+    }
+
+    public void openSearchActivity(View v)
+    {
+        Intent i = new Intent(Users.this, Search.class);
+        startActivity(i);
+    }
+
+    public void openUsersActivity(View v)
+    {
+        Intent i = new Intent(Users.this, Users.class);
+        startActivity(i);
+    }
+
+    public void openSettingsActivity(View v)
+    {
+        Intent i = new Intent(Users.this, Settings.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

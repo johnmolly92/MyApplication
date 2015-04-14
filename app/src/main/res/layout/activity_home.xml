@@ -66,8 +66,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-
-
+                    android:id="@+id/btnHome"
+                    android:onClick="openHomeActivity"
                     android:src="@drawable/ic_action_view_as_list_dark"/>
                 <TextView
                     android:layout_width="wrap_content"
