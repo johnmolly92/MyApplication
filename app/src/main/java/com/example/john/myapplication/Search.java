@@ -88,9 +88,12 @@ public class Search extends Activity implements AdapterView.OnItemSelectedListen
     public void submitSearch(View v){
         name = txtName.getText().toString();
         System.out.println("Clicked the search button");
-        System.out.println("Type: "+type+" Genre: "+music_genre+" Age: "+age+" Date: "+date+" Name: "+name);
 
         Intent i = new Intent(Search.this, SearchList.class);
+
+        if(age.equals("All ages"))
+            age = "-1";
+        System.out.println("Type: "+type+" Genre: "+music_genre+" Age: "+age+" Date: "+date+" Name: "+name);
 
         i.putExtra("event_type", type);
         i.putExtra("music_genre", music_genre);
