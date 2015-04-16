@@ -21,6 +21,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,9 +59,16 @@ public class SingleEvent extends Activity {
     private static final String TAG_DESCRIPTION = "description";
     private static final String TAG_IMAGE_NAME = "image_name";
     private static final String TAG_MUSIC_GENRE = "music_genre";
+    private static final String TAG_LATITUDE = "latitude";
+    private static final String TAG_LONGITUDE = "longitude";
 
     String eventId;
     private String id, name, date, venue, type, price, age, opening_times, description, image_name,music_genre;
+    static double latitude ,longitude;
+
+    static LatLng eventLatLng;
+    static final LatLng KIEL = new LatLng(53.551, 9.993);
+    private GoogleMap map;
 
     //An array of all of our comments
     private JSONArray mComments = null;
@@ -72,7 +87,6 @@ public class SingleEvent extends Activity {
 
 
 
-
     }
 
     @Override
@@ -86,7 +100,37 @@ public class SingleEvent extends Activity {
         //TextView txt = (TextView) findViewById(R.id.event_id);
         //txt.setText(id);
         new GetDetails().execute();
+
+
         //setData(mComments);
+    }
+
+    public void setMap(){
+        System.out.println("BEFORE MAP SET: "+latitude+longitude);
+
+        eventLatLng = new LatLng(latitude, longitude);
+
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+                .getMap();
+
+        if (map!=null){
+            Marker event = map.addMarker(new MarkerOptions()
+                    .position(eventLatLng)
+                    .title(venue)
+                    .snippet(name)
+            );
+          /*  Marker kiel = map.addMarker(new MarkerOptions()
+                    .position(KIEL)
+                    .title("Kiel")
+                    .snippet("Kiel is cool")
+                    .icon(BitmapDescriptorFactory
+                            .fromResource(R.drawable.ic_launcher)));*/
+            // Move the camera instantly to hamburg with a zoom of 15.
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLatLng, 15));
+
+            // Zoom in, animating the camera.
+            //map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        }
     }
 
     public void setData(JSONArray eventDetails){
@@ -107,8 +151,10 @@ public class SingleEvent extends Activity {
                 description = c.getString(TAG_DESCRIPTION);
                 image_name = c.getString(TAG_IMAGE_NAME);
                 music_genre = c.getString(TAG_MUSIC_GENRE);
+                latitude = c.getDouble(TAG_LATITUDE);
+                longitude = c.getDouble(TAG_LONGITUDE);
 
-                System.out.println("Name: " + name + " Date: " + date + " Venue: " + venue + " ID: " + id + " Type: " + type + " price: " + price + " age: " + age + " time: " + opening_times+ " genre: " + music_genre);
+                System.out.println("Name: " + name + " Date: " + date + " Venue: " + venue + " ID: " + id + " Type: " + type + " price: " + price + " age: " + age + " time: " + opening_times+ " genre: " + music_genre+ " latitude: " + latitude+ " longitude: " + longitude);
 
 
                 //annndddd, our JSON data is up to date same with our array list
@@ -226,11 +272,21 @@ public class SingleEvent extends Activity {
 
                         setData(mComments);
 
+
                     }
                 });
               //  setData(mComments);
                     // looping through all posts according to the json object returned
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        setMap();
+
+
+                    }
+                });
 
 
             }    catch (JSONException e) {
