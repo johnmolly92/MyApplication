@@ -25,7 +25,6 @@
         <item>All Types</item>
         <item>Concert</item>
         <item>Nightclub</item>
-        <item>Pub</item>
         <item>Tourist Attraction</item>
     </string-array>
     <string-array name="event_age_array">
@@ -36,12 +35,22 @@
     </string-array>
     <string-array name="event_music_array">
         <item>All Music</item>
+        <item>Rock</item>
+        <item>Pop</item>
         <item>Tropical House</item>
         <item>Disco</item>
         <item>Electronic</item>
         <item>RNB</item>
         <item>Hip Hop</item>
         <item>House</item>
+    </string-array>
+    <string-array name="event_price_array">
+        <item>Any Price</item>
+        <item>€80</item>
+        <item>€40</item>
+        <item>€20</item>
+        <item>€10</item>
+        <item>Free Admission</item>
     </string-array>
 
     <string name="title_activity_search_list">SearchList</string>

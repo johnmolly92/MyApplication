@@ -51,7 +51,7 @@ public class SearchList extends ListActivity {
 
     private ArrayList<HashMap<String, String>> mCommentList;
 
-    private String age,type,music_genre,name,date;
+    private String age,type,music_genre,name,date,venue,price;
 
     private int success;
 
@@ -68,17 +68,19 @@ public class SearchList extends ListActivity {
         age = i.getStringExtra("age");
         date = i.getStringExtra("date");
         name = i.getStringExtra("name");
+        venue = i.getStringExtra("venue");
+        price = i.getStringExtra("price");
 
-        System.out.println("Type: "+type+" Genre: "+music_genre+" Age: "+age+" Date: "+date+" Name: "+name);
+        System.out.println("SEARCHLIST, after getting from intent: Type: "+type+" Genre: "+music_genre+" Age: "+age+" Date: "+date+" Name: "+name+" Venue: "+venue+" Price: "+price);
 
-
+        new LoadSearchResults().execute();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         //loading the comments via AsyncTask
-        new LoadSearchResults().execute();
+
     }
 
     public class LoadSearchResults extends AsyncTask<Void, Void, Boolean> {
@@ -105,6 +107,8 @@ public class SearchList extends ListActivity {
                 params.add(new BasicNameValuePair("age", age));
                 params.add(new BasicNameValuePair("date", date));
                 params.add(new BasicNameValuePair("name", name));
+                params.add(new BasicNameValuePair("venue", venue));
+                params.add(new BasicNameValuePair("price",price));
 
                 Log.d("request!", "starting");
                 // getting product details by making HTTP request
