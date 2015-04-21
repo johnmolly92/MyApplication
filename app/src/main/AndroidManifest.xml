@@ -44,12 +44,12 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name=".Users"
-            android:label="@string/title_activity_users" >
+            android:name=".Welcome"
+            android:label="@string/title_activity_welcome" >
         </activity>
         <activity
-            android:name=".Settings"
-            android:label="@string/title_activity_settings" >
+            android:name=".NearMe"
+            android:label="@string/title_activity_near_me" >
         </activity>
         <activity
             android:name=".SingleEvent"

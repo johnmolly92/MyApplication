@@ -1,9 +1,6 @@
 package com.example.john.myapplication;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.app.ProgressDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,26 +31,12 @@ public class MainActivity extends Activity implements OnClickListener{
     private EditText user, pass;
     private Button mSubmit, mRegister;
 
-    // Progress Dialog
     private ProgressDialog pDialog;
 
-    // JSON parser class
     JSONParser jsonParser = new JSONParser();
 
     //php login script location:
-
-    //localhost :
-    //testing on your device
-    //put your local ip instead,  on windows, run CMD > ipconfig
-    //or in mac's terminal type ifconfig and look for the ip under en0 or en1
     private String LOGIN_URL;
-    // private static final String LOGIN_URL = "http://136.206.236.53:80/webservice/login.php";
-
-    //testing on Emulator:
-    //private static final String LOGIN_URL = "http://10.0.2.2:1234/webservice/login.php";
-
-    //testing from a real server:
-    //private static final String LOGIN_URL = "http://www.yourdomain.com/webservice/login.php";
 
     //JSON element ids from repsonse of php script:
     private static final String TAG_SUCCESS = "success";
@@ -79,29 +62,6 @@ public class MainActivity extends Activity implements OnClickListener{
         mRegister.setOnClickListener(this);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void onClick(View v) {
         // determine which button was pressed:
@@ -109,6 +69,7 @@ public class MainActivity extends Activity implements OnClickListener{
             case R.id.btnLogin:
                 new AttemptLogin().execute();
                 break;
+
             case R.id.btnRegister:
                 Intent i = new Intent(this, Register.class);
                 startActivity(i);
@@ -156,7 +117,7 @@ public class MainActivity extends Activity implements OnClickListener{
                 params.add(new BasicNameValuePair("password", password));
 
                 Log.d("request!", "starting");
-                // getting product details by making HTTP request
+                // getting details by making HTTP request
                 JSONObject json = jsonParser.makeHttpRequest(LOGIN_URL, "POST", params);
 
                 // check your log for json response
@@ -173,7 +134,7 @@ public class MainActivity extends Activity implements OnClickListener{
                     edit.putString("username", username);
                     edit.commit();
 
-                    Intent i = new Intent(MainActivity.this, Home.class);
+                    Intent i = new Intent(MainActivity.this, Welcome.class);
                     finish();
                     startActivity(i);
                     return json.getString(TAG_MESSAGE);

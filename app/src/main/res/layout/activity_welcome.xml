@@ -2,7 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
-
     <LinearLayout
         android:id="@+id/top_layover"
         android:layout_width="fill_parent"
@@ -19,15 +18,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:text="@string/title_activity_search"
+            android:text="@string/title_activity_welcome"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/information_scroll_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/top_layover"
-        android:layout_above="@+id/bottom_layover">
+        android:layout_above="@+id/bottom_layover"
+        android:padding="5dp">
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -36,133 +37,189 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/welcome_text_one"
                 android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:id="@+id/type_layout">
+
+               >
 
                 <TextView
-                    android:text="Event Type: "
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/event_type_spinner"
-                    android:layout_weight="1" />
-
+                    android:text="Welcome to EventFinder!"
+                     >
+                </TextView>
             </LinearLayout>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below= "@+id/welcome_text_one">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center"
+                    android:src="@drawable/ef_logo"
+                    android:scaleType="fitXY"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/welcome_text_two"
+                android:orientation="horizontal"
+                >
 
                 <TextView
-                    android:text="Date:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="The app that makes it easy to find events that YOU are interested in."
+                    >
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/welcome_text_three"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="We recommend first getting started by visiting the search page. There you can customise a search for any events you would be interested in."
+                    >
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/welcome_text_four"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Don't feel pressured to fill out every part of the form. You can mix and match criteria to decide how specific you want the search to be."
+                    >
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/search_button_layout"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                >
+                    <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    style="@style/WhiteText"
+                    android:background="@drawable/black_button"
+                    android:text="Start New Search"
+                    android:id="@+id/btnGoToSearch"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="0dp"
+                    android:onClick="openSearchActivity"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/welcome_text_five"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="If you would like to browse our full list of events why not head to the Home page, here you can find all of the events already on our system. Touch an event to see its full details!"
+                    >
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/home_button_layout"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                >
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pick Date"
-                    android:onClick="showDatePickerDialog" />
-
+                    style="@style/WhiteText"
+                    android:background="@drawable/black_button"
+                    android:text="Go To Home Page"
+                    android:id="@+id/btnGoToHome"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="0dp"
+                    android:onClick="openHomeActivity"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/welcome_text_seven"
+                android:orientation="horizontal"
+                >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name (optional): "/>
-                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtEventName"
-
-                    android:text=""/>
+                    android:gravity="center"
+                    android:text="Don't know what you're looking for? Try our Near Me feature to see nearby events that might take your fancy!"
+                    >
+                </TextView>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/near_me_button_layout"
                 android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:id="@+id/price_layout">
-
-                <TextView
-                    android:text="Max price: "
+                android:padding="10dp"
+                >
+                <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/event_price_spinner"
-                    android:layout_weight="1" />
-
+                    style="@style/WhiteText"
+                    android:background="@drawable/black_button"
+                    android:text="View Events Near Me"
+                    android:id="@+id/btnGoToNearMe"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="0dp"
+                    android:onClick="openNearMeActivity"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/welcome_text_six"
                 android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:id="@+id/age_layout">
+                >
 
                 <TextView
-                    android:text="Age group: "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/event_age_spinner"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Venue: "/>
-                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtVenue"
-
-                    android:text=""/>
+                    android:gravity="center"
+                    android:text="You can use the navigation bar below to visit the Search, Home, and Near Me pages. Also by pressing the Welcome button you can return to this page."
+                    >
+                </TextView>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:id="@+id/music_genre_layout">
 
-                <TextView
-                    android:text="Music Genre: "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/music_genre_spinner"
-                    android:layout_weight="1" />
 
-            </LinearLayout>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/WhiteText"
-                android:background="@drawable/black_button"
-                android:text="Search"
-                android:id="@+id/btnSubmitSearch"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:onClick="submitSearch"
-                />
         </LinearLayout>
     </ScrollView>
 
@@ -211,9 +268,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FFF"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -221,7 +277,7 @@
                     android:layout_gravity="left"
                     android:id="@+id/btnSearch"
                     android:onClick="openSearchActivity"
-                    android:src="@drawable/ic_action_search_dark"/>
+                    android:src="@drawable/ic_action_search"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,6 +306,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#FFF"
                 android:orientation="vertical"
                 android:gravity="center">
 
@@ -258,7 +315,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:onClick="openWelcomeActivity"
-                    android:src="@drawable/ic_action_group"/>
+                    android:src="@drawable/ic_action_group_dark"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -276,8 +333,4 @@
                 android:text="@string/post_comment" /> -->
         </LinearLayout>
     </LinearLayout>
-
-
-
-
 </RelativeLayout>

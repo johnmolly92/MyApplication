@@ -61,7 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFF"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,7 +80,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -94,41 +96,43 @@
                     android:layout_centerVertical="true"
                     android:text="Search"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:onClick="openUsersActivity"
-                    android:src="@drawable/ic_action_group"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Users"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:onClick="openSettingsActivity"
+                    android:onClick="openNearMeActivity"
                     android:src="@drawable/ic_action_settings"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="Settings"/>
+                    android:text="Near Me"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
 
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="openWelcomeActivity"
+                    android:src="@drawable/ic_action_group"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Welcome"/>
+            </LinearLayout>
             <!-- <Button
                 android:id="@+id/post_comment"
                 style="@style/WhiteText"

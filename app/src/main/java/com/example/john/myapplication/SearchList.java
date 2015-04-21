@@ -248,8 +248,8 @@ public class SearchList extends ListActivity {
         if(success ==1) {
             ListAdapter adapter = new SimpleAdapter(this, mCommentList,
                     R.layout.single_post, new String[]{TAG_NAME,
-                    TAG_VENUE, TAG_DATE}, new int[]{R.id.title, R.id.message,
-                    R.id.username});
+                    TAG_VENUE, TAG_DATE}, new int[]{R.id.name, R.id.venue,
+                    R.id.date});
             System.out.println("Created adapter.");
             // I shouldn't have to comment on this one:
             try {

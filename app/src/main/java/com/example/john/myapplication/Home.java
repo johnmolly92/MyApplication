@@ -1,16 +1,11 @@
 package com.example.john.myapplication;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -20,23 +15,15 @@ import org.json.JSONObject;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
+
 
 
 public class Home extends ListActivity {
@@ -51,22 +38,21 @@ public class Home extends ListActivity {
     //put your local ip instead,  on windows, run CMD > ipconfig
     //or in mac's terminal type ifconfig and look for the ip under en0 or en1
     //TODO Change this ip to events.php
-    private String READ_COMMENTS_URL;
+    private String GET_EVENTS_URL;
 
     //testing on Emulator:
-    //private static final String READ_COMMENTS_URL = "http://10.0.2.2:1234/webservice/comments.php";
+    //private static final String GET_EVENTS_URL = "http://10.0.2.2:1234/webservice/comments.php";
 
     //testing from a real server:
-    //private static final String READ_COMMENTS_URL = "http://www.mybringback.com/webservice/comments.php";
+    //private static final String GET_EVENTS_URL = "http://www.mybringback.com/webservice/comments.php";
 
     //JSON IDS:
-    private static final String TAG_SUCCESS = "success";
     private static final String TAG_POSTS = "posts";
     private static final String TAG_NAME = "name";
     private static final String TAG_DATE = "date";
     private static final String TAG_VENUE = "venue";
-    private static final String TAG_TYPE = "type";
     private static final String TAG_ID = "event_id";
+    private static final String TAG_TYPE = "type";
     //it's important to note that the message is both in the parent branch of
     //our JSON tree that displays a "Post Available" or a "No Post Available" message,
     //and there is also a message for each individual post, listed under the "posts"
@@ -74,43 +60,25 @@ public class Home extends ListActivity {
 
 
     //An array of all of our comments
-    private JSONArray mComments = null;
+    private JSONArray events = null;
     //manages all of our comments in a list.
-    private ArrayList<HashMap<String, String>> mCommentList;
+    private ArrayList<HashMap<String, String>> eventList;
 
-    //private ImageButton mSearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-        READ_COMMENTS_URL= getString(R.string.url_start) + "eventstwo.php";
-
-
+        GET_EVENTS_URL = getString(R.string.url_start) + "eventstwo.php";
     }
-
-    /*@Override
-    public void onClick(View v) {
-        // determine which button was pressed:
-        switch (v.getId()) {
-            case R.id.btnSearch:
-                Intent i = new Intent(Home.this, Search.class);
-                startActivity(i);
-                break;
-
-
-            default:
-                break;
-        }
-    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
         //loading the comments via AsyncTask
-        new LoadComments().execute();
+        new LoadEvents().execute();
     }
 
     public void openHomeActivity(View v)
@@ -125,15 +93,15 @@ public class Home extends ListActivity {
         startActivity(i);
     }
 
-    public void openUsersActivity(View v)
+    public void openWelcomeActivity(View v)
     {
-        Intent i = new Intent(Home.this, Users.class);
+        Intent i = new Intent(Home.this, Welcome.class);
         startActivity(i);
     }
 
-    public void openSettingsActivity(View v)
+    public void openNearMeActivity(View v)
     {
-        Intent i = new Intent(Home.this, Settings.class);
+        Intent i = new Intent(Home.this, NearMe.class);
         startActivity(i);
     }
 
@@ -141,19 +109,17 @@ public class Home extends ListActivity {
      * Retrieves json data of comments
      */
     public void updateJSONdata() {
-        System.out.println("Got to updateJSONdata method.");
         // Instantiate the arraylist to contain all the JSON data.
         // we are going to use a bunch of key-value pairs, referring
         // to the json element name, and the content, for example,
         // message it the tag, and "I'm awesome" as the content..
 
-        mCommentList = new ArrayList<HashMap<String, String>>();
+        eventList = new ArrayList<HashMap<String, String>>();
 
-        // Bro, it's time to power up the J parser
         JSONParser jParser = new JSONParser();
         // Feed the beast our comments url, and it spits us
         //back a JSON object.  Boo-yeah Jerome.
-        JSONObject json = jParser.getJSONFromUrl(READ_COMMENTS_URL);
+        JSONObject json = jParser.getJSONFromUrl(GET_EVENTS_URL);
 
         //when parsing JSON stuff, we should probably
         //try to catch any exceptions:
@@ -161,19 +127,20 @@ public class Home extends ListActivity {
 
             //I know I said we would check if "Posts were Avail." (success==1)
             //before we tried to read the individual posts, but I lied...
-            //mComments will tell us how many "posts" or comments are
+            //events will tell us how many "posts" or comments are
             //available
-            mComments = json.getJSONArray(TAG_POSTS);
+            events = json.getJSONArray(TAG_POSTS);
 
             // looping through all posts according to the json object returned
-            for (int i = 0; i < mComments.length(); i++) {
-                JSONObject c = mComments.getJSONObject(i);
+            for (int i = 0; i < events.length(); i++) {
+                JSONObject c = events.getJSONObject(i);
 
                 //gets the content of each tag
                 String id = c.getString(TAG_ID);
                 String name = c.getString(TAG_NAME);
                 String date = c.getString(TAG_DATE);
                 String venue = c.getString(TAG_VENUE);
+                String type = c.getString(TAG_TYPE);
 
                 System.out.println("Title: " + name + " Date: " + date + " Venue: "+ venue + " ID: " + id);
 
@@ -185,9 +152,10 @@ public class Home extends ListActivity {
                 map.put(TAG_NAME, name);
                 map.put(TAG_DATE, date);
                 map.put(TAG_VENUE, venue);
+                map.put(TAG_TYPE,type);
 
                 // adding HashList to ArrayList
-                mCommentList.add(map);
+                eventList.add(map);
 
                 //annndddd, our JSON data is up to date same with our array list
             }
@@ -196,7 +164,7 @@ public class Home extends ListActivity {
             e.printStackTrace();
         }
 
-        Collections.sort(mCommentList, new MapComparator("date"));
+        Collections.sort(eventList, new MapComparator("date"));
         System.out.println("Out of updateJSONdata method.");
 
     }
@@ -221,17 +189,16 @@ public class Home extends ListActivity {
      * Inserts the parsed data into our listview
      */
     private void updateList() {
-        System.out.println("Got to updateList method.");
         // For a ListActivity we need to set the List Adapter, and in order to do
         //that, we need to create a ListAdapter.  This SimpleAdapter,
         //will utilize our updated Hashmapped ArrayList,
         //use our single_post xml template for each item in our list,
         //and place the appropriate info from the list to the
         //correct GUI id.  Order is important here.
-        ListAdapter adapter = new SimpleAdapter(this, mCommentList,
+        ListAdapter adapter = new SimpleAdapter(this, eventList,
                 R.layout.single_post, new String[] { TAG_NAME,
-                TAG_VENUE , TAG_DATE}, new int[] { R.id.title, R.id.message,
-                R.id.username });
+                TAG_TYPE , TAG_DATE}, new int[] { R.id.name, R.id.venue,
+                R.id.date });
 
         // I shouldn't have to comment on this one:
         setListAdapter(adapter);
@@ -250,24 +217,17 @@ public class Home extends ListActivity {
                 // list. For our example we won't be using this, but
                 // it is useful to know in real life applications.
                 Integer e_id = (int) (long) id;
-                HashMap<String,String> test = new HashMap<>(mCommentList.get(e_id));
-                System.out.println("You clicked me!" + " Event ID: " + test.get(TAG_ID) );
-
-
+                HashMap<String,String> clickedEvent = new HashMap<>(eventList.get(e_id));
 
                 Intent i = new Intent(Home.this, SingleEvent.class);
 
-                i.putExtra("event_id", test.get(TAG_ID));
+                i.putExtra("event_id", clickedEvent.get(TAG_ID));
                 startActivity(i);
-
-
-
             }
         });
-        System.out.println("Out of updateList method.");
     }
 
-    public class LoadComments extends AsyncTask<Void, Void, Boolean> {
+    public class LoadEvents extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected void onPreExecute() {
@@ -278,44 +238,18 @@ public class Home extends ListActivity {
             pDialog.setCancelable(true);
             pDialog.show();
         }
+
         @Override
         protected Boolean doInBackground(Void... arg0) {
-            //we will develop this method in version 2
             updateJSONdata();
             return null;
-
         }
-
 
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             pDialog.dismiss();
-            //we will develop this method in version 2
             updateList();
         }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

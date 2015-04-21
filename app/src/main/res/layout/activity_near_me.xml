@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
+
     <LinearLayout
         android:id="@+id/top_layover"
         android:layout_width="fill_parent"
@@ -11,26 +12,28 @@
         android:background="@drawable/blue_gradient"
         android:orientation="horizontal" >
 
-
-
         <TextView
             style="@style/BlackText"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:text="@string/title_activity_users"
+            android:text="@string/title_activity_near_me"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/top_layover">
-
-        <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+        android:layout_below="@+id/top_layover"
+        android:layout_above="@+id/bottom_layover">
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.MapFragment"/>
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/bottom_layover"
@@ -58,7 +61,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:gravity="center"
                 android:orientation="vertical">
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -77,8 +80,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -93,40 +96,43 @@
                     android:layout_centerVertical="true"
                     android:text="Search"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:background="#FFF"
-                android:orientation="vertical">
+                android:gravity="center">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:onClick="openUsersActivity"
-                    android:src="@drawable/ic_action_group_dark"/>
+                    android:onClick="openNearMeActivity"
+                    android:src="@drawable/ic_action_settings_dark"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="Users"/>
+                    android:text="Near Me"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:onClick="openSettingsActivity"
-                    android:src="@drawable/ic_action_settings"/>
+                    android:onClick="openWelcomeActivity"
+                    android:src="@drawable/ic_action_group"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="Settings"/>
+                    android:text="Welcome"/>
             </LinearLayout>
 
             <!-- <Button
@@ -140,4 +146,8 @@
                 android:text="@string/post_comment" /> -->
         </LinearLayout>
     </LinearLayout>
+
+
+
+
 </RelativeLayout>

@@ -33,7 +33,7 @@
 
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -55,13 +55,13 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:paddingLeft="5dp"
-                        android:text="Venue: "
+                        android:text="Event Type: "
                         android:textColor="#5d5d5d"
                         android:textStyle="bold" >
                     </TextView>
 
                     <TextView
-                        android:id="@+id/message"
+                        android:id="@+id/venue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="2dip"
@@ -87,7 +87,7 @@
                     </TextView>
 
                     <TextView
-                        android:id="@+id/username"
+                        android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"

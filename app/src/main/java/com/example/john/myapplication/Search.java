@@ -4,47 +4,19 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
 
 
 public class Search extends Activity implements AdapterView.OnItemSelectedListener{
-
-    private String SEARCH_URL;
-
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MESSAGE = "message";
-
-    private ProgressDialog pDialog;
-
-    JSONParser jsonParser = new JSONParser();
 
     private String age,type,music_genre,name,venue,priceString;
     private long price;
@@ -59,37 +31,36 @@ public class Search extends Activity implements AdapterView.OnItemSelectedListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        SEARCH_URL= getString(R.string.url_start) + "search.php";
-
         txtName = (EditText)findViewById(R.id.txtEventName);
         txtVenue = (EditText)findViewById(R.id.txtVenue);
 
-        Spinner spinner = (Spinner) findViewById(R.id.event_type_spinner);
-        spinner.setOnItemSelectedListener(this);
+        Spinner typeSpinner = (Spinner) findViewById(R.id.event_type_spinner);
+        Spinner ageSpinner = (Spinner) findViewById(R.id.event_age_spinner);
+        Spinner musicSpinner = (Spinner) findViewById(R.id.music_genre_spinner);
+        Spinner priceSpinner = (Spinner) findViewById(R.id.event_price_spinner);
+
+        typeSpinner.setOnItemSelectedListener(this);
+        ageSpinner.setOnItemSelectedListener(this);
+        musicSpinner.setOnItemSelectedListener(this);
+        priceSpinner.setOnItemSelectedListener(this);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.event_type_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        Spinner ageSpinner = (Spinner) findViewById(R.id.event_age_spinner);
-        ageSpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> ageAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_age_array, android.R.layout.simple_spinner_item);
-        ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ageSpinner.setAdapter(ageAdapter);
-
-        Spinner musicSpinner = (Spinner) findViewById(R.id.music_genre_spinner);
-        musicSpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> musicAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_music_array, android.R.layout.simple_spinner_item);
-        musicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        musicSpinner.setAdapter(musicAdapter);
-
-        Spinner priceSpinner = (Spinner) findViewById(R.id.event_price_spinner);
-        priceSpinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> priceAdapter = ArrayAdapter.createFromResource(this,
                 R.array.event_price_array, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        musicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         priceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        typeSpinner.setAdapter(adapter);
+        ageSpinner.setAdapter(ageAdapter);
+        musicSpinner.setAdapter(musicAdapter);
         priceSpinner.setAdapter(priceAdapter);
 
 
@@ -98,12 +69,12 @@ public class Search extends Activity implements AdapterView.OnItemSelectedListen
     public void submitSearch(View v){
         name = txtName.getText().toString();
         venue = txtVenue.getText().toString();
-        System.out.println("Clicked the search button");
 
         Intent i = new Intent(Search.this, SearchList.class);
 
         if(age.equals("All ages"))
             age = "-1";
+
         System.out.println("SEARCH, before pass to intent: Type: "+type+" Genre: "+music_genre+" Age: "+age+" Date: "+date+" Name: "+name+" Venue: "+venue+" Price: "+priceString);
 
         i.putExtra("event_type", type);
@@ -133,18 +104,15 @@ public class Search extends Activity implements AdapterView.OnItemSelectedListen
                 System.out.println("SELECTED: " + music_genre);
                 break;
             case R.id.event_price_spinner:
-               // price = parent.getItemAtPosition(position).toString();
                 price = parent.getItemIdAtPosition(position);
                 priceString = price+"";
                 System.out.println("SELECTED: " + priceString);
                 break;
         }
-
     }
 
-
-
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState){
             // Use the current date as the default date in the picker
@@ -162,7 +130,6 @@ public class Search extends Activity implements AdapterView.OnItemSelectedListen
             monthOfYear +=1;
             String inputDate = year + "-" + checkDate(monthOfYear) + "-" + checkDate(dayOfMonth);
             ((Search)getActivity()).onDateSet(inputDate);
-          //  System.out.println("DATE: " + inputDate);
         }
     }
 
@@ -182,7 +149,7 @@ public class Search extends Activity implements AdapterView.OnItemSelectedListen
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        //do nothing
     }
 
     public void openHomeActivity(View v)
@@ -198,40 +165,15 @@ public class Search extends Activity implements AdapterView.OnItemSelectedListen
         startActivity(i);
     }
 
-    public void openUsersActivity(View v)
+    public void openWelcomeActivity(View v)
     {
-        Intent i = new Intent(Search.this, Users.class);
+        Intent i = new Intent(Search.this, Welcome.class);
         startActivity(i);
     }
 
-    public void openSettingsActivity(View v)
+    public void openNearMeActivity(View v)
     {
-        Intent i = new Intent(Search.this, Settings.class);
+        Intent i = new Intent(Search.this, NearMe.class);
         startActivity(i);
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
 }
