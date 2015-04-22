@@ -10,7 +10,7 @@ import com.example.john.myapplication.R;
 import com.example.john.myapplication.SingleEvent;
 
 /**
- * Created by John on 22/04/2015.
+ * Created by John on 14/04/2015.
  */
 public class HomeTest extends ActivityInstrumentationTestCase2<Home> {
     private NavBarTest navBarTest;
@@ -18,6 +18,7 @@ public class HomeTest extends ActivityInstrumentationTestCase2<Home> {
 
     private ListView eventList;
 
+    private final int SLEEP_TIME = 500;
     private final int TIMEOUT_TIME = 10000;
 
     public HomeTest(){
@@ -39,11 +40,17 @@ public class HomeTest extends ActivityInstrumentationTestCase2<Home> {
         assertNotNull("eventList is null", eventList);
     }
 
-    public void testEventListExists(){
+    public void testEventListAvailable(){
+        try{
+            Thread.sleep(SLEEP_TIME);
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
         assertNotNull(eventList);
     }
 
-    public void testEventClick(){
+    public void testEventListClick(){
         Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(SingleEvent.class.getName(), null, false);
 
         mHome.runOnUiThread(new Runnable() {
@@ -55,6 +62,12 @@ public class HomeTest extends ActivityInstrumentationTestCase2<Home> {
                         eventList.getAdapter().getItemId(0));
             }
         });
+        try{
+            Thread.sleep(SLEEP_TIME);
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
         Activity mSingleEvent = getInstrumentation().waitForMonitorWithTimeout(activityMonitor, TIMEOUT_TIME);
         // next activity is opened and captured.

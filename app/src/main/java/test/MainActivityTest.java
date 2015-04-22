@@ -12,7 +12,7 @@ import com.example.john.myapplication.Register;
 import com.example.john.myapplication.Welcome;
 
 /**
- * Created by John on 21/04/2015.
+ * Created by John on 11/04/2015.
  */
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity>{
 

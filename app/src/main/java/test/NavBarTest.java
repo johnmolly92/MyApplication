@@ -17,7 +17,7 @@ import com.example.john.myapplication.Welcome;
 import junit.framework.TestCase;
 
 /**
- * Created by John on 22/04/2015.
+ * Created by John on 11/04/2015.
  */
 public class NavBarTest extends TestCase {
     private final int SLEEP_TIME = 1000;

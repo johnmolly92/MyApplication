@@ -9,7 +9,7 @@ import com.example.john.myapplication.Welcome;
 import com.google.android.gms.maps.MapFragment;
 
 /**
- * Created by John on 22/04/2015.
+ * Created by John on 15/04/2015.
  */
 public class NearMeTest extends ActivityInstrumentationTestCase2<NearMe> {
     private NavBarTest navBarTest;

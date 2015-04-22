@@ -13,7 +13,7 @@ import com.example.john.myapplication.Search;
 import com.example.john.myapplication.Welcome;
 
 /**
- * Created by John on 22/04/2015.
+ * Created by John on 18/04/2015.
  */
 public class WelcomeTest extends ActivityInstrumentationTestCase2<Welcome> {
     private final int SLEEP_TIME = 500;
