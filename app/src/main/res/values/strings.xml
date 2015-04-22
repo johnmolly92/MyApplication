@@ -54,5 +54,6 @@
     </string-array>
 
     <string name="title_activity_search_list">SearchList</string>
+    <string name="title_activity_example_test_one">ExampleTestOne</string>
 
 </resources>
