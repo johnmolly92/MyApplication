@@ -108,6 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:id="@+id/btnNearMe"
                     android:onClick="openNearMeActivity"
                     android:src="@drawable/ic_action_settings_dark"/>
                 <TextView
@@ -126,6 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:id="@+id/btnWelcome"
                     android:onClick="openWelcomeActivity"
                     android:src="@drawable/ic_action_group"/>
                 <TextView

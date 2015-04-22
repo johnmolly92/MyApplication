@@ -20,14 +20,14 @@ import junit.framework.TestCase;
  * Created by John on 22/04/2015.
  */
 public class NavBarTest extends TestCase {
-    private int SLEEP_TIME = 500;
-    private final int TIMEOUT_TIME = 10000;
+    private final int SLEEP_TIME = 1000;
+    private final int TIMEOUT_TIME = 20000;
 
-    public void testHomeActivity(ActivityTestCase atc, Activity currentActivity, ImageButton homeButton){
+    public void testHomeActivity(ActivityTestCase atc, Activity currentActivity){
         // register next activity that need to be monitored.
         Instrumentation.ActivityMonitor activityMonitor = atc.getInstrumentation().addMonitor(Home.class.getName(), null, false);
 
-       // final ImageButton homeButton = (ImageButton)currentActivity.findViewById(R.id.btnHome);
+        final ImageButton homeButton = (ImageButton)currentActivity.findViewById(R.id.btnHome);
 
         clickButton(homeButton,currentActivity);
 
@@ -37,11 +37,11 @@ public class NavBarTest extends TestCase {
         mHome.finish();
     }
 
-    public void testSearchActivity(ActivityTestCase atc, Activity currentActivity, ImageButton searchButton){
+    public void testSearchActivity(ActivityTestCase atc, Activity currentActivity){
         // register next activity that need to be monitored.
         Instrumentation.ActivityMonitor activityMonitor = atc.getInstrumentation().addMonitor(Search.class.getName(), null, false);
 
-        //final ImageButton searchButton = (ImageButton)currentActivity.findViewById(R.id.btnSearch);
+        final ImageButton searchButton = (ImageButton)currentActivity.findViewById(R.id.btnSearch);
 
         clickButton(searchButton,currentActivity);
 
@@ -51,11 +51,11 @@ public class NavBarTest extends TestCase {
         mSearch.finish();
     }
 
-    public void testNearMeActivity(ActivityTestCase atc, Activity currentActivity, ImageButton nearMeButton){
+    public void testNearMeActivity(ActivityTestCase atc, Activity currentActivity){
         // register next activity that need to be monitored.
         Instrumentation.ActivityMonitor activityMonitor = atc.getInstrumentation().addMonitor(NearMe.class.getName(), null, false);
 
-      //  final ImageButton searchButton = (ImageButton)currentActivity.findViewById(R.id.btnNearMe);
+        final ImageButton nearMeButton = (ImageButton)currentActivity.findViewById(R.id.btnNearMe);
 
         clickButton(nearMeButton,currentActivity);
 
@@ -65,11 +65,11 @@ public class NavBarTest extends TestCase {
         mNearMe.finish();
     }
 
-    public void testWelcomeActivity(ActivityTestCase atc, Activity currentActivity, ImageButton welcomeButton){
+    public void testWelcomeActivity(ActivityTestCase atc, Activity currentActivity){
         // register next activity that need to be monitored.
         Instrumentation.ActivityMonitor activityMonitor = atc.getInstrumentation().addMonitor(Welcome.class.getName(), null, false);
 
-        //  final ImageButton searchButton = (ImageButton)currentActivity.findViewById(R.id.btnNearMe);
+        final ImageButton welcomeButton = (ImageButton)currentActivity.findViewById(R.id.btnWelcome);
 
         clickButton(welcomeButton,currentActivity);
 

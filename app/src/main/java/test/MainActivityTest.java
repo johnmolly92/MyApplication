@@ -20,7 +20,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private EditText username, password;
     private Button loginButton, registerButton;
 
-    private int SLEEP_TIME = 500;
+    private final int SLEEP_TIME = 500;
     private final int TIMEOUT_TIME = 10000;
 
     public MainActivityTest(){
