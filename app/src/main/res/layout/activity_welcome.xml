@@ -51,7 +51,7 @@
                      >
                 </TextView>
             </LinearLayout>
-            <LinearLayout
+           <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -81,7 +81,7 @@
                     android:text="The app that makes it easy to find events that YOU are interested in."
                     >
                 </TextView>
-            </LinearLayout>
+            </LinearLayout> -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

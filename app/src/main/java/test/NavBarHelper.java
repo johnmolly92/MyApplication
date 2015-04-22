@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 /**
  * Created by John on 11/04/2015.
  */
-public class NavBarTest extends TestCase {
+public class NavBarHelper extends TestCase {
     private final int SLEEP_TIME = 1000;
     private final int TIMEOUT_TIME = 20000;
 

@@ -1,21 +1,18 @@
 package test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.ImageButton;
 
 import com.example.john.myapplication.NearMe;
 import com.example.john.myapplication.R;
-import com.example.john.myapplication.Welcome;
 import com.google.android.gms.maps.MapFragment;
 
 /**
  * Created by John on 15/04/2015.
  */
 public class NearMeTest extends ActivityInstrumentationTestCase2<NearMe> {
-    private NavBarTest navBarTest;
+    private NavBarHelper navBarHelper;
+    private MapHelper mapHelper;
     private NearMe mNearMe;
-
-    private MapFragment map;
 
     public NearMeTest(){
         super(NearMe.class);
@@ -25,24 +22,22 @@ public class NearMeTest extends ActivityInstrumentationTestCase2<NearMe> {
     protected void setUp() throws Exception{
         super.setUp();
 
-        navBarTest = new NavBarTest();
+        navBarHelper = new NavBarHelper();
+        mapHelper = new MapHelper();
         mNearMe = getActivity();
-
-        map = (MapFragment)mNearMe.getFragmentManager().findFragmentById(R.id.map);
     }
 
     public void testPreconditions() {
         assertNotNull("mNearMe is null.", mNearMe);
-        assertNotNull("navBarTest is null", navBarTest);
-        assertNotNull("map is null",map);
+        assertNotNull("navBarTest is null", navBarHelper);
     }
 
     public void testMapExists(){
-        assertNotNull(map);
+        mapHelper.testMapExists(mNearMe);
     }
 
     public void testMapVisibility(){
-        assertTrue(map.isVisible());
+        mapHelper.testMapVisibility(mNearMe);
     }
 
     //public void testNavHomeButton(){
@@ -50,14 +45,14 @@ public class NearMeTest extends ActivityInstrumentationTestCase2<NearMe> {
 //    }
 
     public void testNavSearchButton() {
-        navBarTest.testSearchActivity(this, mNearMe);
+        navBarHelper.testSearchActivity(this, mNearMe);
     }
 
     public void testNavNearMeButton(){
-        navBarTest.testNearMeActivity(this, mNearMe);
+        navBarHelper.testNearMeActivity(this, mNearMe);
     }
 
     public void testNavWelcomeButton(){
-        navBarTest.testWelcomeActivity(this, mNearMe);
+        navBarHelper.testWelcomeActivity(this, mNearMe);
     }
 }

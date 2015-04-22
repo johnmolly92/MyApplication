@@ -1,25 +1,15 @@
 package test;
 
-import android.app.Activity;
-import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.ListView;
-
 import com.example.john.myapplication.Home;
-import com.example.john.myapplication.R;
-import com.example.john.myapplication.SingleEvent;
 
 /**
  * Created by John on 14/04/2015.
  */
 public class HomeTest extends ActivityInstrumentationTestCase2<Home> {
-    private NavBarTest navBarTest;
+    private NavBarHelper navBarHelper;
+    private ListHelper listHelper;
     private Home mHome;
-
-    private ListView eventList;
-
-    private final int SLEEP_TIME = 500;
-    private final int TIMEOUT_TIME = 10000;
 
     public HomeTest(){
         super(Home.class);
@@ -29,69 +19,42 @@ public class HomeTest extends ActivityInstrumentationTestCase2<Home> {
     protected void setUp() throws Exception{
         super.setUp();
 
-        navBarTest = new NavBarTest();
+        navBarHelper = new NavBarHelper();
+        listHelper = new ListHelper();
         mHome = getActivity();
-        eventList = (ListView)mHome.findViewById(android.R.id.list);
     }
 
     public void testPreconditions() {
         assertNotNull("mHome is null.", mHome);
-        assertNotNull("navBarTest is null", navBarTest);
-        assertNotNull("eventList is null", eventList);
+        assertNotNull("navBarTest is null", navBarHelper);
+        assertNotNull("listHelper is null", listHelper);
     }
 
     public void testEventListAvailable(){
-        try{
-            Thread.sleep(SLEEP_TIME);
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        assertNotNull(eventList);
+        listHelper.testListNotNull(mHome);
     }
 
     public void testEventListClick(){
-        Instrumentation.ActivityMonitor activityMonitor = getInstrumentation().addMonitor(SingleEvent.class.getName(), null, false);
-
-        mHome.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                eventList.performItemClick(
-                        eventList.getChildAt(0),
-                        0,
-                        eventList.getAdapter().getItemId(0));
-            }
-        });
-        try{
-            Thread.sleep(SLEEP_TIME);
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
-
-        Activity mSingleEvent = getInstrumentation().waitForMonitorWithTimeout(activityMonitor, TIMEOUT_TIME);
-        // next activity is opened and captured.
-        assertNotNull(mSingleEvent);
-        mSingleEvent.finish();
+        listHelper.testClick(this,mHome);
     }
 
-//    public void testNavHomeButton(){
-//        mHome = getActivity();
-//        navBarTest.testHomeActivity(this, mHome);
-//    }
+    public void testNavHomeButton(){
+        mHome = getActivity();
+        navBarHelper.testHomeActivity(this, mHome);
+    }
 
-//    public void testNavSearchButton() {
-//       // mHome = getActivity();
-//        navBarTest.testSearchActivity(this, mHome);
-//    }
+    public void testNavSearchButton() {
+       // mHome = getActivity();
+        navBarHelper.testSearchActivity(this, mHome);
+    }
 
-//    public void testNavNearMeButton(){
-//       // mHome = getActivity();
-//        navBarTest.testNearMeActivity(this, mHome);
-//    }
+    public void testNavNearMeButton(){
+       // mHome = getActivity();
+        navBarHelper.testNearMeActivity(this, mHome);
+    }
 
-//    public void testNavWelcomeButton(){
-//       // mHome = getActivity();
-//        navBarTest.testWelcomeActivity(this, mHome);
-//    }
+    public void testNavWelcomeButton(){
+       // mHome = getActivity();
+        navBarHelper.testWelcomeActivity(this, mHome);
+    }
 }

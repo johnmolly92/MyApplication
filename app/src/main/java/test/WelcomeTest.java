@@ -3,7 +3,6 @@ package test;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.john.myapplication.Home;
@@ -19,11 +18,11 @@ public class WelcomeTest extends ActivityInstrumentationTestCase2<Welcome> {
     private final int SLEEP_TIME = 500;
     private final int TIMEOUT_TIME = 10000;
 
-    private NavBarTest navBarTest;
+    private NavBarHelper navBarHelper;
 
     private Welcome mWelcome;
 
-    private ImageButton homeButton, searchButton, nearMeButton,navHomeButton, navSearchButton, navNearMeButton, navWelcomeButton;
+    private ImageButton homeButton, searchButton, nearMeButton;
 
     public WelcomeTest(){
         super(Welcome.class);
@@ -33,31 +32,24 @@ public class WelcomeTest extends ActivityInstrumentationTestCase2<Welcome> {
     protected void setUp() throws Exception{
         super.setUp();
 
-        navBarTest = new NavBarTest();
+        navBarHelper = new NavBarHelper();
         mWelcome = getActivity();
 
         homeButton = (ImageButton)mWelcome.findViewById(R.id.btnGoToHome);
         searchButton = (ImageButton)mWelcome.findViewById(R.id.btnGoToSearch);
         nearMeButton = (ImageButton)mWelcome.findViewById(R.id.btnGoToNearMe);
 
-        navHomeButton = (ImageButton)mWelcome.findViewById(R.id.btnHome);
-        navSearchButton = (ImageButton)mWelcome.findViewById(R.id.btnSearch);
-        navNearMeButton = (ImageButton)mWelcome.findViewById(R.id.btnNearMe);
-        navWelcomeButton = (ImageButton)mWelcome.findViewById(R.id.btnWelcome);
+
     }
 
     public void testPreconditions() {
         assertNotNull("mWelcome is null.", mWelcome);
-        assertNotNull("navBarTest is null", navBarTest);
+        assertNotNull("navBarTest is null", navBarHelper);
 
         assertNotNull("homeButton is null", homeButton);
         assertNotNull("searchButton is null", searchButton);
         assertNotNull("nearMeButton is null", nearMeButton);
 
-        assertNotNull("navHomeButton is null", navHomeButton);
-        assertNotNull("navSearchButton is null", navSearchButton);
-        assertNotNull("navNearMeButton is null", navNearMeButton);
-        assertNotNull("navWelcomeButton is null", navWelcomeButton);
     }
 
     public void testSearchButton(){
@@ -98,15 +90,15 @@ public class WelcomeTest extends ActivityInstrumentationTestCase2<Welcome> {
 //    }
 
     public void testNavSearchButton() {
-        navBarTest.testSearchActivity(this, mWelcome);
+        navBarHelper.testSearchActivity(this, mWelcome);
     }
 
     public void testNavNearMeButton(){
-        navBarTest.testNearMeActivity(this, mWelcome);
+        navBarHelper.testNearMeActivity(this, mWelcome);
     }
 
     public void testNavWelcomeButton(){
-        navBarTest.testWelcomeActivity(this, mWelcome);
+        navBarHelper.testWelcomeActivity(this, mWelcome);
     }
 
     public void clickButton (final ImageButton  imageButton, Activity activity){

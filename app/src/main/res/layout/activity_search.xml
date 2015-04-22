@@ -64,6 +64,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/btnDatePicker"
                     android:text="Pick Date"
                     android:onClick="showDatePickerDialog" />
 
@@ -239,6 +240,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:id="@+id/btnNearMe"
                     android:onClick="openNearMeActivity"
                     android:src="@drawable/ic_action_settings"/>
                 <TextView
@@ -256,6 +258,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/btnWelcome"
                     android:layout_gravity="left"
                     android:onClick="openWelcomeActivity"
                     android:src="@drawable/ic_action_group"/>
