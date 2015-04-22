@@ -46,6 +46,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="Welcome to EventFinder!"
                      >
                 </TextView>
@@ -76,6 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:textStyle="bold"
                     android:text="The app that makes it easy to find events that YOU are interested in."
                     >
                 </TextView>
@@ -89,125 +91,79 @@
                 android:paddingTop="15dp"
                 >
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="We recommend first getting started by visiting the search page. There you can customise a search for any events you would be interested in."
-                    >
-                </TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/welcome_text_four"
-                android:orientation="horizontal"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Don't feel pressured to fill out every part of the form. You can mix and match criteria to decide how specific you want the search to be."
-                    >
-                </TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/search_button_layout"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                    <Button
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/WhiteText"
-                    android:background="@drawable/black_button"
-                    android:text="Start New Search"
+                    android:layout_gravity="center_vertical"
+
                     android:id="@+id/btnGoToSearch"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="0dp"
-                    android:onClick="openSearchActivity"/>
+                    android:onClick="openSearchActivity"
+                    android:src="@drawable/ic_action_search"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Click to visit the search page. Customise a search for any events you would be interested in. You don't have to fill out every part of the form. You can mix and match criteria."
+                    >
+                </TextView>
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:id="@+id/welcome_text_five"
                 android:orientation="horizontal"
-                >
+                android:paddingTop="15dp"
 
+                >
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/btnGoToHome"
+                    android:onClick="openHomeActivity"
+                    android:src="@drawable/ic_action_view_as_list"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="If you would like to browse our full list of events why not head to the Home page, here you can find all of the events already on our system. Touch an event to see its full details!"
+                    android:text="To browse all events head to the Home page. Touch an event to see its full details!"
                     >
                 </TextView>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/home_button_layout"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/WhiteText"
-                    android:background="@drawable/black_button"
-                    android:text="Go To Home Page"
-                    android:id="@+id/btnGoToHome"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="0dp"
-                    android:onClick="openHomeActivity"/>
-            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:id="@+id/welcome_text_seven"
                 android:orientation="horizontal"
-                >
+                android:paddingTop="15dp"
 
+                >
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/btnGoToNearMe"
+                    android:onClick="openNearMeActivity"
+                    android:src="@drawable/ic_action_settings"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="Don't know what you're looking for? Try our Near Me feature to see nearby events that might take your fancy!"
                     >
                 </TextView>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/near_me_button_layout"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/WhiteText"
-                    android:background="@drawable/black_button"
-                    android:text="View Events Near Me"
-                    android:id="@+id/btnGoToNearMe"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="0dp"
-                    android:onClick="openNearMeActivity"/>
-            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:id="@+id/welcome_text_six"
                 android:orientation="horizontal"
+                android:paddingTop="15dp"
+
                 >
 
                 <TextView
@@ -295,6 +251,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:id="@+id/btnNearMe"
                     android:onClick="openNearMeActivity"
                     android:src="@drawable/ic_action_settings"/>
                 <TextView
@@ -314,6 +271,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:id="@+id/btnWelcome"
                     android:onClick="openWelcomeActivity"
                     android:src="@drawable/ic_action_group_dark"/>
                 <TextView
